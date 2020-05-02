@@ -1,4 +1,5 @@
 const api = require("../../config/api");
+const request = require("request");
 
 exports.reply = function (reply_token, msg) {
   let headers = {
