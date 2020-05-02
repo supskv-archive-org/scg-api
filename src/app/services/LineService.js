@@ -44,7 +44,7 @@ function reply(reply_token, msg) {
 
   request.post(
     {
-      url: api.line_endpoint,
+      url: api.line_reply_endpoint,
       headers: headers,
       body: body,
     },
