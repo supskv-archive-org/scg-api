@@ -13,10 +13,11 @@ exports.prepareReply = function (event) {
   if (!foundMsg) {
     model.updateAnswerCount(user.id, user.cannotAnswer + 1);
     if (user.cannotAnswer === limit) {
-      console.log({
-        userId: user.id,
-        text: "The Line bot cannot answer over limit.",
-      });
+      pushAlert("U9e5c1fc807fff3db84401a018942b6f1", "The Line bot is over.");
+      // console.log({
+      //   userId: user.id,
+      //   text: "The Line bot cannot answer over limit.",
+      // });
     }
   } else {
     model.updateAnswerCount(user.id, 0);
@@ -44,6 +45,34 @@ function reply(reply_token, msg) {
   request.post(
     {
       url: api.line_endpoint,
+      headers: headers,
+      body: body,
+    },
+    (err, res, body) => {
+      console.log("status = " + res.statusCode);
+    }
+  );
+}
+
+function pushAlert(userId, msg) {
+  let headers = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer {" + api.line_channel_access_token + "}",
+  };
+
+  let body = JSON.stringify({
+    to: userId,
+    messages: [
+      {
+        type: "text",
+        text: msg,
+      },
+    ],
+  });
+
+  request.post(
+    {
+      url: api.line_push_endpoint,
       headers: headers,
       body: body,
     },
