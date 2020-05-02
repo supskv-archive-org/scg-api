@@ -1,13 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
-const AIMLParser = require("aimlparser");
+// const AIMLParser = require("aimlparser");
 
 const app = express();
 const port = process.env.PORT || 80;
-const aimlParser = new AIMLParser({ name: "HelloBot" });
+// const aimlParser = new AIMLParser({ name: "HelloBot" });
 
-aimlParser.load(["./aiml.xml"]);
+// aimlParser.load(["./aiml.xml"]);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -15,9 +15,10 @@ app.use(bodyParser.json());
 app.post("/webhook", (req, res) => {
   let reply_token = req.body.events[0].replyToken;
   let msg = req.body.events[0].message.text;
-  aimlParser.getResult(msg, (answer, wildCardArray, input) => {
-    reply(reply_token, answer);
-  });
+  reply(reply_token, keyword(msg));
+  // aimlParser.getResult(msg, (answer, wildCardArray, input) => {
+  //   reply(reply_token, answer);
+  // });
   res.sendStatus(200);
 });
 
@@ -54,4 +55,12 @@ function reply(reply_token, msg) {
       console.log("status = " + res.statusCode);
     }
   );
+}
+
+function keyword(msg) {
+  if (msg === "hello") {
+    return "HELLO!";
+  }
+
+  return "Not Response";
 }
