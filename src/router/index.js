@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const WebhookController = require("../app/http/controllers/WebhookController");
+const DOSCGController = require("../app/http/controllers/DOSCGController");
 
 // Home page route.
 router.get("/", function (req, res) {
@@ -12,6 +12,6 @@ router.get("/about", function (req, res) {
   res.send("About this wiki");
 });
 
-router.post("/webhook/:service", WebhookController.webhook);
+router.post("/webhook/:service", DOSCGController.webhook);
 
 module.exports = router;
