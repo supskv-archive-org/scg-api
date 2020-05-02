@@ -7,5 +7,6 @@ module.exports = {
     "https://api.line.me/v2/bot/message/reply",
   line_push_endpoint:
     process.env.LINE_PUSH_ENDPOINT || "https://api.line.me/v2/bot/message/push",
+  line_me_userid: process.env.LINE_ME_USERID || "",
   google_maps_api_key: process.env.GOOGLE_MAPS_API_KEY || "",
 };

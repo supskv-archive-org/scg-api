@@ -13,7 +13,7 @@ exports.prepareReply = function (event) {
   if (!foundMsg) {
     model.updateAnswerCount(user.id, user.cannotAnswer + 1);
     if (user.cannotAnswer > limit) {
-      pushAlert("U9e5c1fc807fff3db84401a018942b6f1", "The Line bot is over.");
+      pushAlert(api.line_me_userid, "The Line bot is over.");
     }
   } else {
     model.updateAnswerCount(user.id, 0);
