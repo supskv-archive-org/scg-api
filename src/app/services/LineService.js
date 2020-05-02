@@ -12,12 +12,8 @@ exports.prepareReply = function (event) {
   let user = model.getById(userId);
   if (!foundMsg) {
     model.updateAnswerCount(user.id, user.cannotAnswer + 1);
-    if (user.cannotAnswer === limit) {
+    if (user.cannotAnswer > limit) {
       pushAlert("U9e5c1fc807fff3db84401a018942b6f1", "The Line bot is over.");
-      // console.log({
-      //   userId: user.id,
-      //   text: "The Line bot cannot answer over limit.",
-      // });
     }
   } else {
     model.updateAnswerCount(user.id, 0);

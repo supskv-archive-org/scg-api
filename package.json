@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/app.js",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^2.6.0",
     "aimlparser": "^1.0.5",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
