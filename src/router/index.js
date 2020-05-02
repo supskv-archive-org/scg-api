@@ -14,5 +14,7 @@ router.get("/about", function (req, res) {
 
 router.post("/webhook/:service", DOSCGController.webhook);
 router.get("/googlemaps/directions", DOSCGController.getDirectionAPI);
+router.get("/calculate/hidden-number", DOSCGController.findHiddenNumber);
+router.get("/calculate/find-bnc", DOSCGController.findBnC);
 
 module.exports = router;
