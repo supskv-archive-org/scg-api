@@ -1,7 +1,7 @@
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 
-const adapter = new FileSync("mockup-db/doscg.json");
+const adapter = new FileSync("doscg-db.json");
 const db = low(adapter);
 
 // Set default if json is empty.

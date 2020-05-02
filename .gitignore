@@ -2,4 +2,4 @@
 npm-debug.log
 .DS_Store
 /*.env
-mockup-db/doscg.json
+doscg-db.json
