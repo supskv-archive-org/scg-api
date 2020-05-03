@@ -12,8 +12,13 @@ And you must add other variable below
 PORT=8000
 
 # required (can see all my token in mail)
+# Use for line bot webhook
 LINE_CHANNEL_ACCESS_TOKEN=
+
+# Use for getting notification from line bot
 LINE_ME_USERID=
+
+# Use for Google maps API Directions
 GOOGLE_MAPS_API_KEY=
 ```
 
