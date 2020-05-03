@@ -23,7 +23,7 @@ GOOGLE_MAPS_API_KEY=
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve
 node src/app.js
 ```
 
