@@ -22,6 +22,13 @@ LINE_ME_USERID=
 GOOGLE_MAPS_API_KEY=
 ```
 
+## LINE Bot
+
+I just add sample answer.
+The bot can answer from text "hello" then response "HELLO!" otherwise response "Try again.".
+If cannot answer > 10, the bot will send to LINE_ME_USERID.
+If can answer the bot will reset user's count.
+
 ## Build Setup
 
 ```bash
