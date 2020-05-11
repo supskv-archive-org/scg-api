@@ -1,32 +1,32 @@
-const api = require("../../config/api");
-const model = require("../models/DOSCG");
-const request = require("request");
+const api = require("../../config/api")
+const model = require("../models/DOSCG")
+const request = require("request")
 
 exports.prepareReply = function (event) {
-  const limit = 10;
-  let reply_token = event.replyToken;
-  let userId = event.source.userId;
+  const limit = 10
+  let reply_token = event.replyToken
+  let userId = event.source.userId
 
-  let { resMsg, foundMsg } = getResponseMsg(event.message.text);
-  model.save(userId);
-  let user = model.getById(userId);
+  let { resMsg, foundMsg } = getResponseMsg(event.message.text)
+  model.save(userId)
+  let user = model.getById(userId)
   if (!foundMsg) {
-    model.updateAnswerCount(user.id, user.cannotAnswer + 1);
+    model.updateAnswerCount(user.id, user.cannotAnswer + 1)
     if (user.cannotAnswer > limit) {
-      pushAlert(api.line_me_userid, "The Line bot is over.");
+      pushAlert(api.line_me_userid, "The bot cannot answer more than 10.")
     }
   } else {
-    model.updateAnswerCount(user.id, 0);
+    model.updateAnswerCount(user.id, 0)
   }
 
-  reply(reply_token, resMsg);
-};
+  reply(reply_token, resMsg)
+}
 
 function reply(reply_token, msg) {
   let headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer {" + api.line_channel_access_token + "}",
-  };
+  }
 
   let body = JSON.stringify({
     replyToken: reply_token,
@@ -36,7 +36,7 @@ function reply(reply_token, msg) {
         text: msg,
       },
     ],
-  });
+  })
 
   request.post(
     {
@@ -45,16 +45,16 @@ function reply(reply_token, msg) {
       body: body,
     },
     (err, res, body) => {
-      console.log("status = " + res.statusCode);
+      console.log("status = " + res.statusCode)
     }
-  );
+  )
 }
 
 function pushAlert(userId, msg) {
   let headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer {" + api.line_channel_access_token + "}",
-  };
+  }
 
   let body = JSON.stringify({
     to: userId,
@@ -64,7 +64,7 @@ function pushAlert(userId, msg) {
         text: msg,
       },
     ],
-  });
+  })
 
   request.post(
     {
@@ -73,15 +73,15 @@ function pushAlert(userId, msg) {
       body: body,
     },
     (err, res, body) => {
-      console.log("status = " + res.statusCode);
+      console.log("status = " + res.statusCode)
     }
-  );
+  )
 }
 
 function getResponseMsg(msg) {
   if (msg === "hello") {
-    return { resMsg: "HELLO!", foundMsg: true };
+    return { resMsg: "HELLO!", foundMsg: true }
   }
 
-  return { resMsg: "Try again.", foundMsg: false };
+  return { resMsg: "Try again.", foundMsg: false }
 }
